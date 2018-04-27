@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cn.crebas.dao.role.HtmlMenuDao">
+
+
+    <select id="getAll" resultType="htmlMenu">
+        SELECT  id, menu_code, menu_name, menu_url,parent_menu
+        from T_Html_Menu
+    </select>
+
+</mapper>

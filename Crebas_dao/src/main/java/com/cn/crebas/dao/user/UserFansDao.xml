@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cn.crebas.dao.user.UserFansDao">
+    <select id="getById" parameterType="int">
+        SELECT tuf.id,
+        tuf.fans_code,
+        tuf.user_id,
+        tuf.fans_id,
+        tuf.fans_name,
+        tui.id,
+        tui.user_phone
+        FROM t_user_fans tuf,t_user_info tui
+        <where>
+        tuf.user_id = tui.id
+            <if test="userPhone!=''and userPhone!=null">
+                AND and tui.user_phone like concat('%',#{userPhone},'%')
+            </if>
+        </where>
+    </select>
+</mapper>

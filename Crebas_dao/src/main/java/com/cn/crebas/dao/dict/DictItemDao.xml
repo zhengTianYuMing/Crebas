@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cn.crebas.dao.dict.DictItemDao">
+    <resultMap id="T_Dict_ItemResultMap" type="DictItem">
+        <id property="id" column="gid" />
+        <result property="gName" column="gName"/>
+    </resultMap>
+    <insert id="insert" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into T_Dict_Item
+        (dict_key,item_key,item_name,time,f_item_key,size,create_time,update_time,is_use)
+        values (#{dictKey},#{itemKey},#{itemName},#{time},#{fItemKey},#{size},#{createTime},#{updateTime}
+        ,#{isUse})
+    </insert>
+    <update id="update">
+        update T_Dict_Item
+        <set>
+            <if test="dictKey!=null and dictKey!=''">dict_key = #{dictKey},</if>
+            <if test="itemKey!=null and itemKey!=''">item_key = #{itemKey},</if>
+            <if test="itemName!=null and itemName!=''">item_name = #{itemName},</if>
+            <if test="time!=null and time!=''">time = #{time},</if>
+            <if test="fItemKey!=null and fItemKey!=''">f_item_key = #{fItemKey},</if>
+            <if test="size!=null and size!=''">size = #{size},</if>
+            <if test="createTime!=null and createTime!=''">create_time = #{createTime},</if>
+            <if test="updateTime!=null and updateTime!=''">update_time = #{updateTime},</if>
+            <if test="isUse!=null and isUse!=''">is_use = #{isUse},</if>
+        </set>
+        where
+        id=#{id}
+    </update>
+
+    <delete id="deleteById">
+        delete from T_Dict_Item
+        where
+        id=#{id}
+    </delete>
+
+    <select id="getById" resultType="DictItem">
+        SELECT  id, dict_key, item_key, item_name, time, f_item_key, size, create_time, update_time,is_use from T_Dict_Item
+        where
+        id=#{id}
+    </select>
+
+    <select id="getAll" resultType="DictItem">
+        SELECT  id, dict_key, item_key, item_name, time, f_item_key, size, create_time, update_time,is_use
+        from T_Dict_Item
+    </select>
+    <select id="getListByMap" resultType="DictItem">
+        SELECT  id, dict_key, item_key, item_name, time, f_item_key, size, create_time, update_time,is_use
+        from T_Dict_Item
+        <where>
+            <if test="itemName!=null and itemName!=''">
+                and item_name like concat('%',#{itemName},'%')
+            </if>
+            <if test="dictKey!=null and dictKey!=''">
+                and dict_key= #{dictKey}
+            </if>
+            <if test="itemKey!=null and itemKey!=''">
+                and item_key =#{itemKey}
+            </if>
+
+            <if test="time!=null and time!=''">
+                and time like concat('%',#{time},'%')
+            </if>
+            <if test="fItemKey!=null and fItemKey!=''">
+                and f_item_key like concat('%',#{fItemKey},'%')
+            </if>
+            <if test="size!=null and size!=''">
+                and size like concat('%',#{size},'%')
+            </if>
+            <if test="createTime!=null and createTime!=''">
+                and create_time like concat('%',#{createTime},'%')
+            </if>
+            <if test="updateTime!=null and updateTime!=''">
+                and update_time like concat('%',#{updateTime},'%')
+            </if>
+            <if test="isUse!=null and isUse!=''">
+                and is_use like concat('%',#{isUse},'%')
+            </if>
+        </where>
+    </select>
+    <select id="getPaginationByMap" resultType="DictItem">
+            SELECT  id, dict_key, item_key, item_name, time, f_item_key, size, create_time, update_time,is_use
+            from T_Dict_Item
+            <where>
+            <if test="dictKey!=null and dictKey!=''">
+                and dict_key like concat('%',#{dictKey},'%')
+            </if>
+            <if test="itemKey!=null and itemKey!=''">
+                and item_key like concat('%',#{itemKey},'%')
+            </if>
+            <if test="itemName!=null and itemName!=''">
+                and item_name like concat('%',#{itemName},'%')
+            </if>
+            <if test="time!=null and time!=''">
+                and time like concat('%',#{time},'%')
+            </if>
+            <if test="fItemKey!=null and fItemKey!=''">
+                and f_item_key like concat('%',#{fItemKey},'%')
+            </if>
+            <if test="size!=null and size!=''">
+                and size like concat('%',#{size},'%')
+            </if>
+            <if test="createTime!=null and createTime!=''">
+                and create_time like concat('%',#{createTime},'%')
+            </if>
+            <if test="updateTime!=null and updateTime!=''">
+                and update_time like concat('%',#{updateTime},'%')
+            </if>
+            <if test="isUse!=null and isUse!=''">
+                and is_use like concat('%',#{isUse},'%')
+            </if>
+            </where>
+            limit  #{start},#{pageSize}
+    </select>
+</mapper>

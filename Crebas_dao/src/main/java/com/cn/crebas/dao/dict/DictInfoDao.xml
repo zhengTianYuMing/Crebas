@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cn.crebas.dao.dict.DictInfoDao">
+    <resultMap id="T_Dict_InfoResultMap" type="DictInfo">
+        <id property="id" column="gid" />
+        <result property="gName" column="gName"/>
+    </resultMap>
+    <insert id="insert" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into T_Dict_Info (dict_value)
+        values (#{dictValue})
+    </insert>
+    <update id="update">
+        update T_Dict_Info
+        <set>
+            <if test="dictKey!=null and dictKey!=''">dict_key = #{dictKey},</if>
+            <if test="dictValue!=null and dictValue!=''">dict_value = #{dictValue},</if>
+            <if test="isUse!=null and isUse!=''">is_use = #{isUse},</if>
+        </set>
+        where
+        id=#{id}
+    </update>
+
+    <delete id="deleteById">
+        delete from T_Dict_Info
+        where
+        id=#{id}
+    </delete>
+
+    <select id="getById" resultType="DictInfo">
+        SELECT  id, dict_key, dict_value,is_use from T_Dict_Info
+        where
+        id=#{id}
+    </select>
+
+    <select id="getAll" resultType="DictInfo">
+        SELECT  id, dict_key, dict_value,is_use
+        from T_Dict_Info
+    </select>
+    <select id="getListByMap" resultType="DictInfo">
+        SELECT  id, dict_key, dict_value,is_use
+        from T_Dict_Info
+        <where>
+            <if test="dictKey!=null and dictKey!=''">
+                and dict_key like concat('%',#{dictKey},'%')
+            </if>
+            <if test="dictValue!=null and dictValue!=''">
+                and dict_value like concat('%',#{dictValue},'%')
+            </if>
+            <if test="isUse!=null and isUse!=''">
+                and is_use like concat('%',#{isUse},'%')
+            </if>
+        </where>
+    </select>
+    <select id="getPaginationByMap" resultType="DictInfo">
+            SELECT  id, dict_key, dict_value,is_use
+            from T_Dict_Info
+            <where>
+            <if test="dictKey!=null and dictKey!=''">
+                and dict_key like concat('%',#{dictKey},'%')
+            </if>
+            <if test="dictValue!=null and dictValue!=''">
+                and dict_value like concat('%',#{dictValue},'%')
+            </if>
+            <if test="isUse!=null and isUse!=''">
+                and is_use like concat('%',#{isUse},'%')
+            </if>
+            </where>
+            limit  #{start},#{pageSize}
+    </select>
+</mapper>

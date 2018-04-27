@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cn.crebas.dao.role.JmruDao">
+    <select id="getById" parameterType="map" resultType="jmru">
+    SELECT tsi.password,tsi.phone ,tsu.role_id,tsu.staff_id,tsr.role_name,tsi.id,tsjm.menu_id,tsjm.menu_id,
+    tsj.jurisdiction_name,thm.menu_icon,thm.menu_name,thm.menu_url,thm.parent_menu,thm.menu_code
+    FROM t_staff_info tsi,t_staff_jm tsjm,t_staff_jurisdiction tsj,
+    t_staff_role tsr,t_staff_ur tsu,t_html_menu thm
+    WHERE tsi.id=tsu.staff_id AND  tsu.role_id=tsr.id AND tsr.id=tsjm.role_id
+    AND tsjm.jur_id=tsj.id AND tsjm.menu_id=thm.id
+    AND
+    tsi.phone=#{phone} AND tsi.password=#{password}
+    AND tsjm.jur_id=#{jurId}
+</select>
+
+    <select id="getByMenu" parameterType="map" resultType="jmru">
+    SELECT tsi.password,tsi.phone ,tsu.role_id,tsu.staff_id,tsr.role_name,tsi.id,tsjm.menu_id,tsjm.menu_id,
+    tsj.jurisdiction_name,thm.menu_icon,thm.menu_name,thm.menu_url,thm.parent_menu,thm.id
+    FROM t_staff_info tsi,t_staff_jm tsjm,t_staff_jurisdiction tsj,
+    t_staff_role tsr,t_staff_ur tsu,t_html_menu thm
+    WHERE tsi.id=tsu.staff_id AND  tsu.role_id=tsr.id AND tsr.id=tsjm.role_id
+    AND tsjm.jur_id=tsj.id AND tsjm.menu_id=thm.id
+    AND thm.menu_name=#{menuName} AND tsu.staff_id=#{staffId}
+</select>
+</mapper>

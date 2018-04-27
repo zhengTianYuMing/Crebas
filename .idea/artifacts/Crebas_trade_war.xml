@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Crebas_trade:war">
+    <output-path>$PROJECT_DIR$/Crebas_trade/target</output-path>
+    <root id="archive" name="Crebas_trade.war">
+      <element id="artifact" artifact-name="Crebas_trade:war exploded" />
+    </root>
+  </artifact>
+</component>

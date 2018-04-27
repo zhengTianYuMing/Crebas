@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <!--获取数据库配置文件-->
+    <context:property-placeholder location="classpath:DB.properties"/>
+    <!--配置数据源-->
+    <bean id="dataSource"
+          class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="maxWait" value="${jdbc.maxWait}"/>
+        <property name="maxActive" value="${jdbc.maxActive}"/>
+        <property name="maxIdle" value="${jdbc.maxIdle}"/>
+        <property name="minIdle" value="${jdbc.minIdle}"/>
+        <property name="initialSize" value="${jdbc.initialSize}"/>
+        <property name="removeAbandoned"
+                  value="${jdbc.removeAbandoned}"/>
+        <property name="removeAbandonedTimeout"
+                  value="${jdbc.removeAbandonedTimeout}"/>
+    </bean>
+
+    <!--加载sqlSessionFactory-->
+    <bean id="sqlSessionFactory"
+          class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--装在数据源-->
+        <property name="dataSource" ref="dataSource"/>
+        <!--加载mybatis-config.xml-->
+        <property name="configLocation"
+                  value="classpath:mybatis-config.xml"/>
+        <!--指明mapper所在的包-->
+        <property name="mapperLocations"
+                  value="classpath*:com/cn/crebas/dao/*/*.xml"/>
+    </bean>
+
+    <!--指定扫描dao包-->
+    <bean
+            class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--指定session工厂-->
+        <property name="sqlSessionFactoryBeanName"
+                  value="sqlSessionFactory"/>
+        <!--指明要扫描的dao-->
+        <property name="basePackage" value="com.cn.crebas.dao"/>
+    </bean>
+
+
+</beans>

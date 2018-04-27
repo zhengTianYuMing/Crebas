@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cn.crebas.dao.user.UserInfoDao">
+    <resultMap id="T_User_InfoResultMap" type="UserInfo">
+        <id property="id" column="gid" />
+        <result property="gName" column="gName"/>
+    </resultMap>
+
+
+    <insert id="insert" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into T_User_Info
+        (user_code,user_name,user_phone,password,dict_key,item_key,is_use,portrait)
+        values (#{userCode},#{userName},#{userPhone},#{password},
+        #{dictKey},#{itemKey},#{isUse},#{portrait})
+    </insert>
+
+
+    <update id="update">
+        update T_User_Info
+        <set>
+            <if test="userCode!=null and userCode!=''">user_code = #{userCode},</if>
+            <if test="userName!=null and userName!=''">user_name = #{userName},</if>
+            <if test="userPhone!=null and userPhone!=''">user_phone = #{userPhone},</if>
+            <if test="password!=null and password!=''">password = #{password},</if>
+            <if test="dictKey!=null and dictKey!=''">dict_key = #{dictKey},</if>
+            <if test="itemKey!=null and itemKey!=''">item_key = #{itemKey},</if>
+            <if test="isUse!=null and isUse!=''">is_use = #{isUse},</if>
+            <if test="portrait!=null and portrait!=''">portrait = #{portrait},</if>
+        </set>
+        where
+        id=#{id}
+    </update>
+
+    <delete id="deleteById">
+        delete from T_User_Info
+        where
+        id=#{id}
+    </delete>
+
+    <select id="getById" resultType="UserInfo">
+        SELECT  id, user_code, user_name, user_phone, password, identify, dict_key, item_key,is_use from T_User_Info
+        where
+        id=#{id}
+    </select>
+
+    <select id="getAll" parameterType="java.lang.String" resultType="UserInfo">
+       SELECT  tui.id, tui.user_code,tui.qq,tui.sina, tui.user_name, tui.user_phone, tui.password, tui.dict_key, tui.item_key,tui.is_use
+        ,tdi.item_name,tui.portrait
+        from T_User_Info tui,t_dict_item tdi
+        <where>
+            tui.dict_key=tdi.dict_key and tui.item_key=tdi.item_key
+
+            <if test="userPhone!=null and userPhone!=''">
+                and tui.user_phone like concat('%',#{userPhone},'%')
+            </if>
+
+            <if test="itemName!=null and itemName!=''">
+                and tdi.item_name like concat('%',#{itemName},'%')
+            </if>
+        </where>
+        ORDER BY tui.id
+
+    </select>
+    <select id="getListByMap" resultType="UserInfo">
+        SELECT  id, user_code, user_name, user_phone, password, identify, dict_key, item_key,is_use
+        from T_User_Info
+        <where>
+            <if test="userCode!=null and userCode!=''">
+                and user_code like concat('%',#{userCode},'%')
+            </if>
+            <if test="userName!=null and userName!=''">
+                and user_name like concat('%',#{userName},'%')
+            </if>
+            <if test="userPhone!=null and userPhone!=''">
+                and user_phone like concat('%',#{userPhone},'%')
+            </if>
+            <if test="userSex!=null and userSex!=''">
+                and user_sex like concat('%',#{userSex},'%')
+            </if>
+            <if test="password!=null and password!=''">
+                and password like concat('%',#{password},'%')
+            </if>
+            <if test="dictKey!=null and dictKey!=''">
+                and dict_key like concat('%',#{dictKey},'%')
+            </if>
+            <if test="itemKey!=null and itemKey!=''">
+                and item_key like concat('%',#{itemKey},'%')
+            </if>
+            <if test="isUse!=null and isUse!=''">
+                and is_use like concat('%',#{isUse},'%')
+            </if>
+        </where>
+    </select>
+    <select id="getPaginationByMap" resultType="UserInfo">
+            SELECT  id, user_code, user_name, user_phone, password, identify, dict_key, item_key,is_use
+            from T_User_Info
+            <where>
+            <if test="userCode!=null and userCode!=''">
+                and user_code like concat('%',#{userCode},'%')
+            </if>
+            <if test="userName!=null and userName!=''">
+                and user_name like concat('%',#{userName},'%')
+            </if>
+            <if test="userPhone!=null and userPhone!=''">
+                and user_phone like concat('%',#{userPhone},'%')
+            </if>
+            <if test="password!=null and password!=''">
+                and password like concat('%',#{password},'%')
+            </if>
+            <if test="dictKey!=null and dictKey!=''">
+                and dict_key like concat('%',#{dictKey},'%')
+            </if>
+            <if test="itemKey!=null and itemKey!=''">
+                and item_key like concat('%',#{itemKey},'%')
+            </if>
+            <if test="isUse!=null and isUse!=''">
+                and is_use like concat('%',#{isUse},'%')
+            </if>
+            </where>
+            limit  #{start},#{pageSize}
+    </select>
+
+    <select id="count" resultType="int">
+        SELECT  count(*)
+        from T_User_Info tui,t_dict_item tdi
+        <where>
+            tui.dict_key=tdi.dict_key and tui.item_key=tdi.item_key
+
+            <if test="userPhone!=null and userPhone!=''">
+                and tui.user_phone like concat('%',#{userPhone},'%')
+            </if>
+
+            <if test="itemName!=null and itemName!=''">
+                and tdi.item_name like concat('%',#{itemName},'%')
+            </if>
+        </where>
+        ORDER BY tui.id
+    </select>
+</mapper>

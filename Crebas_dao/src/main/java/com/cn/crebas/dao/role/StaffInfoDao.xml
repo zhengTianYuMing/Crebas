@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cn.crebas.dao.role.StaffInfoDao">
+
+    <insert id="insert" parameterType="staffInfo">
+        insert into T_Staff_Info (staff_code,staff_name,phone,password,sex,wages,`id_card`,contact,`time`)
+        values (#{staffCode},#{staffName},#{phone},#{password},#{sex},#{wages})
+    </insert>
+    <update id="update">
+        update T_Staff_Info
+        <set>
+            <if test="#{staffCode}!=null and #{staffCode}!=''">staff_code = #{staffCode},</if>
+            <if test="#{staffName}!=null and #{staffName}!=''">staff_name = #{staffName},</if>
+            <if test="#{phone}!=null and #{phone}!=''">phone = #{phone},</if>
+            <if test="#{password}!=null and #{password}!=''">password = #{password},</if>
+            <if test="#{sex}!=null and #{sex}!=''">sex = #{sex},</if>
+            <if test="#{wages}!=null and #{wages}!=''">wages = #{wages},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        delete from T_Staff_Info
+        where id=#{id}
+    </delete>
+
+    <select id="getById" resultType="staffInfo">
+        SELECT  id, staff_code, staff_name, phone, password, sex,wages,`id_card`,contact,`time` from T_Staff_Info
+        where id=#{id}
+    </select>
+
+    <select id="getAll" resultType="staffInfo">
+        SELECT  id, staff_code, staff_name, phone, password, sex,wages
+        from T_Staff_Info
+    </select>
+
+    <select id="getListByMap"
+            resultType="staffInfo">
+        SELECT  id, staff_code, staff_name, phone, password, sex,wages,`id_card`,contact,`time`
+        from T_Staff_Info
+        <where>
+            <if test="phone!=null and phone!=''">
+                and phone like concat('%',#{phone},'%')
+            </if>
+
+            <if test="sex!=null and sex!=''">
+                and sex like concat('%',#{sex},'%')
+            </if>
+
+        </where>
+    </select>
+    <select id="login" parameterType="map" resultType="staffInfo">
+            SELECT  id, staff_code, staff_name, phone, password, sex,wages,`id_card`,contact,`time`
+            from T_Staff_Info
+            <where>
+            <if test="phone!=null and phone!=''">
+                and phone like concat('%',#{phone},'%')
+            </if>
+            <if test="password!=null and password!=''">
+                and password like concat('%',#{password},'%')
+            </if>
+            </where>
+    </select>
+
+    <select id="count" resultType="int">
+        SELECT count(*)
+        from T_Staff_Info
+        <where>
+            <if test="phone!=null and phone!=''">
+                and phone like concat('%',#{phone},'%')
+            </if>
+
+            <if test="sex!=null and sex!=''">
+                and sex like concat('%',#{sex},'%')
+            </if>
+        </where>
+    </select>
+</mapper>

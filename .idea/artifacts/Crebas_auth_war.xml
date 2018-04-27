@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Crebas_auth:war">
+    <output-path>$PROJECT_DIR$/Crebas_auth/target</output-path>
+    <root id="archive" name="Crebas_auth.war">
+      <element id="artifact" artifact-name="Crebas_auth:war exploded" />
+    </root>
+  </artifact>
+</component>

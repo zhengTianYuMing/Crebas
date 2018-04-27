@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Crebas_auth/Crebas_auth.iml" filepath="$PROJECT_DIR$/Crebas_auth/Crebas_auth.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Crebas_bean/Crebas_bean.iml" filepath="$PROJECT_DIR$/Crebas_bean/Crebas_bean.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Crebas_common/Crebas_common.iml" filepath="$PROJECT_DIR$/Crebas_common/Crebas_common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Crebas_dao/Crebas_dao.iml" filepath="$PROJECT_DIR$/Crebas_dao/Crebas_dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Crebas_search/Crebas_search.iml" filepath="$PROJECT_DIR$/Crebas_search/Crebas_search.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Crebas_service/Crebas_service.iml" filepath="$PROJECT_DIR$/Crebas_service/Crebas_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Crebas_trade/Crebas_trade.iml" filepath="$PROJECT_DIR$/Crebas_trade/Crebas_trade.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Crebas_web/Crebas_web.iml" filepath="$PROJECT_DIR$/Crebas_web/Crebas_web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/crebas.iml" filepath="$PROJECT_DIR$/crebas.iml" />
+    </modules>
+  </component>
+</project>

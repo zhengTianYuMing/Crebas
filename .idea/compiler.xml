@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="Crebas_auth" />
+        <module name="Crebas_bean" />
+        <module name="Crebas_common" />
+        <module name="Crebas_dao" />
+        <module name="Crebas_search" />
+        <module name="Crebas_service" />
+        <module name="Crebas_trade" />
+        <module name="Crebas_web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="1.8">
+      <module name="crebas" target="1.5" />
+      <module name="Crebas_auth" target="1.5" />
+      <module name="Crebas_bean" target="1.5" />
+      <module name="Crebas_common" target="1.5" />
+      <module name="Crebas_dao" target="1.5" />
+      <module name="Crebas_search" target="1.5" />
+      <module name="Crebas_service" target="1.5" />
+      <module name="Crebas_trade" target="1.5" />
+      <module name="Crebas_web" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

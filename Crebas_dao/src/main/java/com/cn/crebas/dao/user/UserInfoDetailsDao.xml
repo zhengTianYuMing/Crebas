@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cn.crebas.dao.user.UserInfoDetailsDao">
+    <resultMap id="T_User_Info_DetailsResultMap" type="UserInfoDetails">
+        <id property="id" column="gid" />
+        <result property="gName" column="gName"/>
+    </resultMap>
+    <insert id="insert" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into T_User_Info_Details
+        (user_age,user_sex,portrait,occupation,address,user_integration,
+        user_price,create_time,update_time,qq,is_alipay,is_payment,is_payment_pwd,last_register_time,identify)
+        values (#{userAge},#{userSex},#{portrait},#{occupation},#{address},#{userIntegration},
+        #{userPrice},#{createTime},#{updateTime},#{qq},#{isAlipay},#{isPayment},#{isPaymentPwd},
+        #{lastRegisterTime},#{identify})
+    </insert>
+
+    <update id="update">
+        update T_User_Info_Details
+        <set>
+            <if test="userAge!=null and userAge!=''">user_age = #{userAge},</if>
+            <if test="portrait!=null and portrait!=''">portrait = #{portrait},</if>
+            <if test="occupation!=null and occupation!=''">occupation = #{occupation},</if>
+            <if test="address!=null and address!=''">address = #{address},</if>
+            <if test="userIntegration!=null and userIntegration!=''">user_integration = #{userIntegration},</if>
+            <if test="userPrice!=null and userPrice!=''">user_price = #{userPrice},</if>
+            <if test="createTime!=null and createTime!=''">create_time = #{createTime},</if>
+            <if test="updateTime!=null and updateTime!=''">update_time = #{updateTime},</if>
+            <if test="qq!=null and qq!=''">qq = #{qq},</if>
+            <if test="isAlipay!=null and isAlipay!=''">is_alipay = #{isAlipay},</if>
+            <if test="isPayment!=null and isPayment!=''">is_payment = #{isPayment},</if>
+            <if test="isPaymentPwd!=null and isPaymentPwd!=''">is_payment_pwd = #{isPaymentPwd},</if>
+            <if test="lastRegisterTime!=null and lastRegisterTime!=''">last_register_time = #{lastRegisterTime},</if>
+            <if test="identify!=null and identify!=''">identify = #{identify},</if>
+        </set>
+        where
+        id=#{id}
+    </update>
+
+    <delete id="deleteById">
+        delete from T_User_Info_Details
+        where
+        id=#{id}
+    </delete>
+
+    <select id="getById" resultType="UserInfoDetails">
+        SELECT  id, user_age,user_sex, occupation, address, user_integration,
+         user_price, create_time, update_time, is_alipay, is_payment,
+          is_payment_pwd, last_register_time,identify,alipay
+           from T_User_Info_Details
+        where
+        id=#{id}
+    </select>
+
+    <select id="getAll" resultType="UserInfoDetails">
+        SELECT  id,user_sex, user_age, portrait, occupation, address, user_integration, user_price, create_time, update_time, qq, is_alipay, is_payment, is_payment_pwd, last_register_time,identify
+        from T_User_Info_Details
+    </select>
+    <select id="getListByMap" resultType="UserInfoDetails">
+        SELECT  id,user_sex, user_age, portrait, occupation, address, user_integration, user_price, create_time, update_time, qq, is_alipay, is_payment, is_payment_pwd, last_register_time,identify
+        from T_User_Info_Details
+        <where>
+            <if test="userAge!=null and userAge!=''">
+                and user_age like concat('%',#{userAge},'%')
+            </if>
+            <if test="portrait!=null and portrait!=''">
+                and portrait like concat('%',#{portrait},'%')
+            </if>
+            <if test="occupation!=null and occupation!=''">
+                and occupation like concat('%',#{occupation},'%')
+            </if>
+            <if test="address!=null and address!=''">
+                and address like concat('%',#{address},'%')
+            </if>
+            <if test="userIntegration!=null and userIntegration!=''">
+                and user_integration like concat('%',#{userIntegration},'%')
+            </if>
+            <if test="userPrice!=null and userPrice!=''">
+                and user_price like concat('%',#{userPrice},'%')
+            </if>
+            <if test="createTime!=null and createTime!=''">
+                and create_time like concat('%',#{createTime},'%')
+            </if>
+            <if test="updateTime!=null and updateTime!=''">
+                and update_time like concat('%',#{updateTime},'%')
+            </if>
+            <if test="qq!=null and qq!=''">
+                and qq like concat('%',#{qq},'%')
+            </if>
+            <if test="isAlipay!=null and isAlipay!=''">
+                and is_alipay like concat('%',#{isAlipay},'%')
+            </if>
+            <if test="isPayment!=null and isPayment!=''">
+                and is_payment like concat('%',#{isPayment},'%')
+            </if>
+            <if test="isPaymentPwd!=null and isPaymentPwd!=''">
+                and is_payment_pwd like concat('%',#{isPaymentPwd},'%')
+            </if>
+            <if test="lastRegisterTime!=null and lastRegisterTime!=''">
+                and last_register_time like concat('%',#{lastRegisterTime},'%')
+            </if>
+            <if test="identify!=null and identify!=''">
+                and identify like concat('%',#{identify},'%')
+            </if>
+        </where>
+    </select>
+    <select id="getPaginationByMap" resultType="UserInfoDetails">
+            SELECT  id,user_sex, user_age, portrait, occupation, address, user_integration, user_price, create_time, update_time, qq, is_alipay, is_payment, is_payment_pwd, last_register_time,identify
+            from T_User_Info_Details
+            <where>
+            <if test="userAge!=null and userAge!=''">
+                and user_age like concat('%',#{userAge},'%')
+            </if>
+            <if test="portrait!=null and portrait!=''">
+                and portrait like concat('%',#{portrait},'%')
+            </if>
+            <if test="occupation!=null and occupation!=''">
+                and occupation like concat('%',#{occupation},'%')
+            </if>
+            <if test="address!=null and address!=''">
+                and address like concat('%',#{address},'%')
+            </if>
+            <if test="userIntegration!=null and userIntegration!=''">
+                and user_integration like concat('%',#{userIntegration},'%')
+            </if>
+            <if test="userPrice!=null and userPrice!=''">
+                and user_price like concat('%',#{userPrice},'%')
+            </if>
+            <if test="createTime!=null and createTime!=''">
+                and create_time like concat('%',#{createTime},'%')
+            </if>
+            <if test="updateTime!=null and updateTime!=''">
+                and update_time like concat('%',#{updateTime},'%')
+            </if>
+            <if test="qq!=null and qq!=''">
+                and qq like concat('%',#{qq},'%')
+            </if>
+            <if test="isAlipay!=null and isAlipay!=''">
+                and is_alipay like concat('%',#{isAlipay},'%')
+            </if>
+            <if test="isPayment!=null and isPayment!=''">
+                and is_payment like concat('%',#{isPayment},'%')
+            </if>
+            <if test="isPaymentPwd!=null and isPaymentPwd!=''">
+                and is_payment_pwd like concat('%',#{isPaymentPwd},'%')
+            </if>
+            <if test="lastRegisterTime!=null and lastRegisterTime!=''">
+                and last_register_time like concat('%',#{lastRegisterTime},'%')
+            </if>
+            <if test="identify!=null and identify!=''">
+                and identify like concat('%',#{identify},'%')
+            </if>
+            </where>
+            limit  #{start},#{pageSize}
+    </select>
+</mapper>
